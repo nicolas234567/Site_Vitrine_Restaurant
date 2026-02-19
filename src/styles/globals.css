@@ -1,0 +1,94 @@
+/* =========================================
+   globals.css — Sakura Maison
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+/* ---- Variables ---- */
+:root {
+  --ink:      #120f09;
+  --cream:    #f6efe3;
+  --gold:     #b8870c;
+  --red:      #8c1c1c;
+  --muted:    #6d5c44;
+  --light:    #ede4d5;
+  --border:   rgba(184, 135, 12, 0.25);
+
+  --font-display: 'Noto Serif JP', serif;
+  --font-body:    'Cormorant Garamond', serif;
+
+  --section-gap: 8rem;
+  --container:   1200px;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+/* ---- Utilities ---- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.section {
+  padding: var(--section-gap) 0;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.8rem 0;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura Maison — Restaurant Asiatique</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- =============================================
+     globals.css
+     ============================================= -->
+<style>
+:root {
+  --ink:   #120f09;
+  --cream: #f6efe3;
+  --gold:  #b8870c;
+  --red:   #8c1c1c;
+  --muted: #6d5c44;
+  --light: #ede4d5;
+  --border: rgba(184,135,12,0.25);
+  --font-display: 'Noto Serif JP', serif;
+  --font-body:    'Cormorant Garamond', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }
+
+/* =============================================
+   Navbar.module.css
+   ============================================= */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(246,239,227,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.logo-main { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--red); letter-spacing: 0.04em; }
+.logo-sub { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); font-weight: 300; display: block; margin-top: 2px; }
+nav ul { display: flex; gap: 2.5rem; }
+.nav-link {
+  font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--muted); font-weight: 400; position: relative;
+  transition: color 0.25s;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: var(--red); transition: width 0.3s;
+}
+.nav-link:hover { color: var(--red); }
+.nav-link:hover::after { width: 100%; }
+
+/* =============================================
+   Hero.module.css
+   ============================================= */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding-top: 80px; position: relative; overflow: hidden;
+}
+.hero-kanji {
+  position: absolute; right: -3rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-display); font-size: 45vw;
+  color: rgba(140,28,28,0.045); line-height: 1;
+  pointer-events: none; user-select: none; z-index: 0;
+  animation: fadeIn 1.8s ease both;
+}
+.hero-content {
+  padding: 4rem 3rem 4rem 5rem; position: relative; z-index: 1;
+}
+.eyebrow {
+  font-size: 0.72rem; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--gold); font-weight: 300; margin-bottom: 1.5rem; display: block;
+}
+.hero h1 {
+  font-family: var(--font-display); font-size: clamp(3.2rem,6.5vw,6rem);
+  font-weight: 300; line-height: 1.05; color: var(--ink);
+}
+.hero-subtitle {
+  display: block; font-family: var(--font-body); font-style: italic;
+  font-size: clamp(1.4rem,3vw,2.2rem); color: var(--red); font-weight: 300; margin-top: 0.3rem;
+}
+.hero-desc {
+  margin-top: 2rem; font-size: 1.2rem; line-height: 1.85;
+  color: var(--muted); max-width: 38ch; font-weight: 300;
+}
+.cta {
+  display: inline-block; margin-top: 2.8rem; padding: 0.85rem 2.5rem;
+  border: 1px solid var(--red); color: var(--red);
+  font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;
+  transition: background 0.3s, color 0.3s; cursor: pointer; font-family: var(--font-body);
+}
+.cta:hover { background: var(--red); color: var(--cream); }
+
+.hero-visual {
+  height: 100%; min-height: 100vh; position: relative; overflow: hidden;
+  background: var(--light); display: flex; align-items: center; justify-content: center;
+}
+.circle {
+  width: min(55vw, 420px); aspect-ratio: 1; border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; position: relative;
+  animation: scaleIn 1.2s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+.circle::before {
+  content: ''; position: absolute; inset: 12px; border-radius: 50%;
+  border: 1px solid var(--border);
+}
+.circle-text {
+  font-family: var(--font-display); font-size: clamp(5rem,10vw,9rem);
+  font-weight: 300; color: var(--red); opacity: 0.7;
+  animation: spin 40s linear infinite;
+}
+/* petals around circle */
+.petal {
+  position: absolute; width: 10px; height: 22px;
+  background: rgba(140,28,28,0.18); border-radius: 50%;
+  transform-origin: center 200%;
+}
+
+/* =============================================
+   Reveal animations (Intersection Observer)
+   ============================================= */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1); }
+.reveal-right.visible { opacity: 1; transform: none; }
+
+/* =============================================
+   Hero stagger animation
+   ============================================= */
+.fade1 { animation: fadeUp 0.85s 0.1s cubic-bezier(0.22,1,0.36,1) both; }
+.fade2 { animation: fadeUp 0.85s 0.25s cubic-bezier(0.22,1,0.36,1) both; }
+.fade3 { animation: fadeUp 0.85s 0.4s cubic-bezier(0.22,1,0.36,1) both; }
+.fade4 { animation: fadeUp 0.85s 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =============================================
+   Menu.module.css
+   ============================================= */
+.menu-section { padding: 8rem 0; background: var(--ink); color: var(--cream); }
+.menu-header { text-align: center; margin-bottom: 5rem; }
+.menu-header .eyebrow { color: var(--gold); }
+.menu-title {
+  font-family: var(--font-display); font-size: clamp(2rem,4vw,3.2rem);
+  font-weight: 300; color: var(--cream);
+}
+.divider { width: 48px; height: 1px; background: var(--gold); margin: 1.8rem auto; }
+.divider-left { margin: 1.8rem 0; }
+.menu-categories {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap: 4rem 3rem;
+}
+.menu-category {}
+.cat-title {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+  color: var(--gold); margin-bottom: 2rem; letter-spacing: 0.08em;
+  display: flex; align-items: center; gap: 1rem;
+}
+.cat-title::after { content: ''; flex: 1; height: 1px; background: rgba(184,135,12,0.25); }
+.menu-items { display: flex; flex-direction: column; gap: 1.4rem; }
+.menu-item {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(246,239,227,0.06);
+}
+.item-left { flex: 1; }
+.item-name { font-size: 1.05rem; font-weight: 400; color: var(--cream); margin-bottom: 0.2rem; }
+.item-desc { font-size: 0.88rem; color: rgba(246,239,227,0.45); font-style: italic; font-weight: 300; line-height: 1.5; }
+.item-price { font-size: 1rem; color: var(--gold); font-weight: 300; white-space: nowrap; letter-spacing: 0.05em; }
+
+/* =============================================
+   InfoSection.module.css
+   ============================================= */
+.info-section { padding: 8rem 0; background: var(--cream); }
+.info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0 4rem; align-items: start; }
+.info-sep { background: var(--border); align-self: stretch; margin-top: 1rem; }
+.block-title {
+  font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem);
+  font-weight: 300; color: var(--ink); margin-bottom: 2.5rem; line-height: 1.15;
+}
+.hours-list { display: flex; flex-direction: column; }
+.hours-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 1.05rem;
+}
+.hours-row:first-child { border-top: 1px solid var(--border); }
+.day { color: var(--muted); font-weight: 300; }
+.time { color: var(--ink); font-weight: 400; }
+.closed { color: var(--red); font-style: italic; font-weight: 300; }
+
+.address-block { display: flex; flex-direction: column; gap: 2.5rem; }
+.address-item { display: flex; flex-direction: column; gap: 0.4rem; }
+.address-label { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); font-weight: 300; }
+.address-text { font-size: 1.15rem; line-height: 1.7; color: var(--ink); font-weight: 300; }
+.address-link {
+  display: inline-block; margin-top: 0.5rem; font-size: 0.8rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--red);
+  border-bottom: 1px solid var(--red); padding-bottom: 2px; transition: opacity 0.2s;
+}
+.address-link:hover { opacity: 0.7; }
+.map-placeholder {
+  margin-top: 1.5rem; width: 100%; height: 220px; background: var(--light);
+  border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.map-placeholder::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(184,135,12,0.04) 10px, rgba(184,135,12,0.04) 11px);
+}
+.map-pin { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; z-index: 1; }
+.map-pin-icon {
+  width: 28px; height: 28px; border: 2px solid var(--red);
+  border-radius: 50% 50% 50% 0; transform: rotate(-45deg); position: relative;
+}
+.map-pin-icon::after {
+  content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--red);
+}
+.map-pin-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+/* =============================================
+   Footer.module.css
+   ============================================= */
+footer {
+  background: var(--ink); color: var(--cream);
+  padding: 4rem 0 2.5rem; text-align: center;
+  border-top: 1px solid rgba(184,135,12,0.2);
+}
+.footer-kanji { font-family: var(--font-display); font-size: 3rem; font-weight: 300; color: var(--gold); opacity: 0.6; margin-bottom: 1rem; }
+.footer-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--cream); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+.footer-tagline { font-size: 0.82rem; letter-spacing: 0.25em; color: rgba(246,239,227,0.4); text-transform: uppercase; font-weight: 300; margin-bottom: 2.5rem; }
+.footer-line { width: 48px; height: 1px; background: rgba(184,135,12,0.3); margin: 2rem auto; }
+.footer-copy { font-size: 0.78rem; color: rgba(246,239,227,0.3); letter-spacing: 0.1em; font-weight: 300; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-content { padding: 6rem 2rem 3rem; }
+  .hero-visual { min-height: 40vh; }
+}
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  nav ul { gap: 1.5rem; }
+  .info-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .info-sep { display: none; }
+}
+@media (max-width: 640px) {
+  .menu-categories { grid-template-columns: 1fr; gap: 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================== NAVBAR ================== -->
+<nav>
+  <div>
+    <span class="logo-main">桜 Sakura</span>
+    <span class="logo-sub">Cuisine Asiatique</span>
+  </div>
+  <ul>
+    <li><a href="#menu" class="nav-link">Menu</a></li>
+    <li><a href="#horaires" class="nav-link">Horaires</a></li>
+    <li><a href="#adresse" class="nav-link">Adresse</a></li>
+  </ul>
+</nav>
+
+<!-- ================== HERO ================== -->
+<section class="hero">
+  <div class="hero-kanji" aria-hidden="true">桜</div>
+
+  <div class="hero-content">
+    <span class="eyebrow fade1">Depuis 2008 · Paris, France</span>
+    <h1 class="fade2">桜 Maison
+      <em class="hero-subtitle">L'art de la table asiatique</em>
+    </h1>
+    <p class="hero-desc fade3">
+      Un voyage culinaire entre le Japon, la Thaïlande et le Vietnam.
+      Des saveurs authentiques, des produits frais, dans une atmosphère
+      douce et apaisante.
+    </p>
+    <a href="#menu" class="cta fade4">Découvrir le menu</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="circle">
+      <span class="circle-text">桜</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================== MENU ================== -->
+<section id="menu" class="menu-section">
+  <div class="container">
+    <div class="menu-header reveal">
+      <span class="eyebrow">Notre sélection</span>
+      <h2 class="menu-title">Le Menu</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="menu-categories">
+
+      <!-- Entrées -->
+      <div class="menu-category reveal">
+        <h3 class="cat-title">Entrées</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Gyoza vapeur</p>
+              <p class="item-desc">Raviolis japonais au porc &amp; gingembre</p>
+            </div>
+            <span class="item-price">8 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Nems croustillants</p>
+              <p class="item-desc">Porc, crevettes, vermicelles</p>
+            </div>
+            <span class="item-price">7 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Edamame</p>
+              <p class="item-desc">Fèves de soja salées au gros sel</p>
+            </div>
+            <span class="item-price">5 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Soupe Tom Yum</p>
+              <p class="item-desc">Bouillon lemongrass, crevettes, champignons</p>
+            </div>
+            <span class="item-price">9 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plats -->
+      <div class="menu-category reveal" style="transition-delay:0.1s">
+        <h3 class="cat-title">Plats principaux</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Ramen Tonkotsu</p>
+              <p class="item-desc">Bouillon de porc 12h, œuf mollet, chashu</p>
+            </div>
+            <span class="item-price">16 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Bœuf Thaï Basilic</p>
+              <p class="item-desc">Wok de bœuf, basilic thaï, piment</p>
+            </div>
+            <span class="item-price">15 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Pho bœuf</p>
+              <p class="item-desc">Bouillon parfumé, bœuf tranché, herbes fraîches</p>
+            </div>
+            <span class="item-price">14 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Curry vert crevettes</p>
+              <p class="item-desc">Lait de coco, aubergines, riz jasmin</p>
+            </div>
+            <span class="item-price">15 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sushis -->
+      <div class="menu-category reveal" style="transition-delay:0.2s">
+        <h3 class="cat-title">Sushis &amp; Makis</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Sashimi saumon (8 pcs)</p>
+              <p class="item-desc">Saumon de Norvège, sauce soja</p>
+            </div>
+            <span class="item-price">14 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">California Roll (6 pcs)</p>
+              <p class="item-desc">Avocat, crabe, concombre</p>
+            </div>
+            <span class="item-price">10 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Spicy Tuna (6 pcs)</p>
+              <p class="item-desc">Thon, mayo épicée, sésame</p>
+            </div>
+            <span class="item-price">12 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Plateau Découverte</p>
+              <p class="item-desc">30 pièces assorties</p>
+            </div>
+            <span class="item-price">38 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu-category reveal" style="transition-delay:0.3s">
+        <h3 class="cat-title">Desserts &amp; Boissons</h3>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Mochi glacé (3 pcs)</p>
+              <p class="item-desc">Fraise, matcha, mangue</p>
+            </div>
+            <span class="item-price">7 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Crème de mangue</p>
+              <p class="item-desc">Mangue fraîche, lait de coco</p>
+            </div>
+            <span class="item-price">6 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Thé vert Sencha</p>
+              <p class="item-desc">Importé du Japon</p>
+            </div>
+            <span class="item-price">4 €</span>
+          </div>
+          <div class="menu-item">
+            <div class="item-left">
+              <p class="item-name">Sake chaud ou froid</p>
+              <p class="item-desc">Sake Junmai traditionnel</p>
+            </div>
+            <span class="item-price">7 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================== HORAIRES + ADRESSE ================== -->
+<section class="info-section" id="horaires">
+  <div class="container">
+    <div class="info-grid">
+
+      <!-- Horaires -->
+      <div class="reveal-left">
+        <span class="eyebrow">Quand nous trouver</span>
+        <h2 class="block-title">Horaires<br>d'ouverture</h2>
+        <div class="hours-list">
+          <div class="hours-row">
+            <span class="day">Lundi</span>
+            <span class="closed">Fermé</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Mardi – Vendredi</span>
+            <span class="time">12h – 14h30 · 19h – 22h30</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Samedi</span>
+            <span class="time">12h – 15h · 19h – 23h00</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Dimanche</span>
+            <span class="time">12h – 15h30</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Separateur -->
+      <div class="info-sep"></div>
+
+      <!-- Adresse -->
+      <div class="reveal-right" id="adresse">
+        <span class="eyebrow">Nous rendre visite</span>
+        <h2 class="block-title">Adresse &amp;<br>Contact</h2>
+
+        <div class="address-block">
+          <div class="address-item">
+            <span class="address-label">Adresse</span>
+            <p class="address-text">42 Rue du Temple<br>75004 Paris, France</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="address-link">Voir sur Google Maps →</a>
+          </div>
+          <div class="address-item">
+            <span class="address-label">Téléphone</span>
+            <p class="address-text">+33 (0)1 42 71 00 22</p>
+          </div>
+          <div class="address-item">
+            <span class="address-label">Email</span>
+            <p class="address-text">reservation@sakuramaison.fr</p>
+          </div>
+          <div class="map-placeholder">
+            <div class="map-pin">
+              <div class="map-pin-icon"></div>
+              <span class="map-pin-label">Sakura Maison</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================== FOOTER ================== -->
+<footer>
+  <div class="container">
+    <div class="reveal">
+      <div class="footer-kanji">桜</div>
+      <p class="footer-name">Sakura Maison</p>
+      <p class="footer-tagline">Cuisine asiatique — Paris, France</p>
+      <div class="footer-line"></div>
+      <p class="footer-copy">© 2026 Sakura Maison. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll reveal (remplace Framer Motion pour la preview HTML) -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '-60px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
