@@ -1,5 +1,13 @@
-# 🌸 Sakura Maison — Site Vitrine Restaurant Asiatique
+# 🌸 Sakura Maison — Site Vitrine Restaurant Asiatique 
 
+## Installation & lancement
+
+```bash
+npm install
+npm run dev
+```
+
+Ouvrir [http://localhost:3000](http://localhost:3000)
 ## Stack technique
 - **Next.js 14** (App Router)
 - **Framer Motion** — animations fluides (scroll reveal, stagger, hover)
@@ -28,15 +36,6 @@ sakura-restaurant/
 │       └── Footer.module.css
 └── preview.html              ← Aperçu standalone (sans Next.js)
 ```
-
-## Installation & lancement
-
-```bash
-npm install
-npm run dev
-```
-
-Ouvrir [http://localhost:3000](http://localhost:3000)
 
 ## Animations (Framer Motion)
 
