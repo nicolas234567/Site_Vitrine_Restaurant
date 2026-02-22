@@ -3,6 +3,7 @@
 ## Installation & lancement
 
 ```bash
+cd "c:/emplacementdudossier"
 npm install
 npm run dev
 ```
