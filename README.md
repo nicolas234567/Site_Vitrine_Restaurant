@@ -1,4 +1,4 @@
-# 🌸 Sakura Maison — Site Vitrine Restaurant Asiatique 
+# Sakura Maison — Site Vitrine Restaurant Asiatique 
 
 ## Installation & lancement
 
