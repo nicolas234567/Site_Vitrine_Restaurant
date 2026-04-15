@@ -1,5 +1,9 @@
 # Sakura Maison — Site Vitrine Restaurant Asiatique 
 
+## Accès live
+
+Ouvrir [https://restaurant.nicolasbregevin.com/](https://restaurant.nicolasbregevin.com/)
+
 ## Installation & lancement
 
 ```bash
@@ -35,7 +39,6 @@ sakura-restaurant/
 │       ├── Menu.module.css
 │       ├── InfoSection.module.css
 │       └── Footer.module.css
-└── preview.html              ← Aperçu standalone (sans Next.js)
 ```
 
 ## Animations (Framer Motion)

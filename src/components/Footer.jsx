@@ -20,7 +20,7 @@ export default function Footer() {
           <p className={styles.name}>Sakura Maison</p>
           <p className={styles.tagline}>Cuisine asiatique — Paris, France</p>
           <div className={styles.line} />
-          <p className={styles.copy}>© {new Date().getFullYear()} Sakura Maison. Tous droits réservés. Nicolas BREGEVIN</p>
+          <p className={styles.copy}>© {new Date().getFullYear()} Sakura Maison. Tous droits réservés. <a href="https://nicolasbregevin.com/">Nicolas BREGEVIN</a></p>
         </motion.div>
       </div>
     </footer>
